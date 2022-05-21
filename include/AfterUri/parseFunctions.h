@@ -11,7 +11,7 @@
 namespace internalFunc {
 using namespace AfterUri;
 using InternalUriStdExt::String;
-  /** @brief Checks if `ip_address` is a valid IPv4 or IPv6 address
+/** @brief Checks if `ip_address` is a valid IPv4 or IPv6 address
  *
  * @param[in] ip_address
  *    IPv4 or IPv6 address as an string
@@ -34,8 +34,8 @@ auto check_hostname(const std::string_view hostname) -> Error;
  *    Returns the scheme of the URI as an std::string, if it's not found
  *    then it returns a std::nullopt
  * */
-auto parse_scheme(std::span<const char> &uri_str, Error &error)
-    -> std::optional<std::string>;
+auto parse_scheme(std::span<const char>& uri_str, Error& error)
+  -> std::optional<std::string>;
 
 /** @brief Returns the authority of the URI
  *
@@ -46,16 +46,16 @@ auto parse_scheme(std::span<const char> &uri_str, Error &error)
  *     Returns the authority of the URI as an std::string, if no authority is
  * found then it returns std::nullopt
  * */
-auto parse_authority(std::span<const char> &uri_str)
-    -> std::optional<std::string>;
+auto parse_authority(std::span<const char>& uri_str)
+  -> std::optional<std::string>;
 
-auto authority_contains_port(const std::string &authority) -> bool;
+auto authority_contains_port(const std::string& authority) -> bool;
 
-auto extract_user_info(const std::string &authority)
-    -> std::optional<std::string>;
-auto extract_port_number(const std::string &authority) -> std::uint16_t;
+auto extract_user_info(const std::string& authority)
+  -> std::optional<std::string>;
+auto extract_port_number(const std::string& authority) -> std::uint16_t;
 auto extract_hostname(std::string_view authority) -> std::string_view;
 
-} // namespace internalFunc
+}// namespace internalFunc
 
 #endif

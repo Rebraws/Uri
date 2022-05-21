@@ -12,7 +12,7 @@
 namespace AfterUri {
 
 enum class Error {
-  OK, 
+  OK,
   NO_SCHEME,
   UNKOWN_ERROR,
   INVALID_IPv4,

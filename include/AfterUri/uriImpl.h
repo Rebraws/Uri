@@ -5,30 +5,27 @@
 #include <AfterUri/uri.h>
 
 using namespace InternalUriStdExt;
-struct AfterUri::Uri::UriImpl {
+struct AfterUri::Uri::UriImpl
+{
 
-  auto parse(std::span<const char> uri_str) -> Error {
-    using namespace std::string_literals; 
+  auto parse(std::span<const char> uri_str) -> Error
+  {
+    using namespace std::string_literals;
     Error error = Error::OK;
     scheme = internalFunc::parse_scheme(uri_str, error).value_or(""s);
 
-    if (error != Error::OK) {
-      return error;
-    }
+    if (error != Error::OK) { return error; }
 
     authority = internalFunc::parse_authority(uri_str).value_or(""s);
 
     if (!authority.empty()) {
-      userInfo = internalFunc::extract_user_info(authority).value_or(""s); 
-      
-      const auto hostname =
-          internalFunc::extract_hostname(authority);
+      userInfo = internalFunc::extract_user_info(authority).value_or(""s);
+
+      const auto hostname = internalFunc::extract_hostname(authority);
       error = internalFunc::check_hostname(hostname);
-      
-      if (error != Error::OK) {
-        return error;
-      }
-      
+
+      if (error != Error::OK) { return error; }
+
     } else {
       userInfo.clear();
     }
@@ -39,11 +36,9 @@ struct AfterUri::Uri::UriImpl {
     return error;
   }
 
-  auto getScheme() const noexcept -> const std::string & { return scheme; }
+  auto getScheme() const noexcept -> const std::string& { return scheme; }
 
-  auto getAuthority() const noexcept -> const std::string & {
-    return authority;
-  }
+  auto getAuthority() const noexcept -> const std::string& { return authority; }
 
   auto getPort() const noexcept -> std::uint16_t { return port; }
 
@@ -51,7 +46,7 @@ struct AfterUri::Uri::UriImpl {
 
   auto getQuery() const noexcept -> const std::string& { return query; }
 
-  bool containsPort{false};
+  bool containsPort{ false };
   std::uint16_t port;
   std::string scheme;
   std::string authority;
