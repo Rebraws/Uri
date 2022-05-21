@@ -1,3 +1,7 @@
+windows_build/
+build/
+tmp/
+.cache
 # Prerequisites
 *.d
 
