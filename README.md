@@ -2,18 +2,6 @@
 
 Uri is a C++20 cross-platorm library for parsing Uniform Resource Identifier (URI)
 
-Tested compilers and platforms:
-OS: Windows 10.0.19043
-SDK version 10.0.22000.0
-Compilers tested in windows:
-Compiler: MSVC 19.30.30709.0
-Compiler: clang version 13.0.0 Target: x86_64-pc-windows-msvc
-
-
-OS: Ubuntu 20.04.03 LTS
-Compilers tested in GNU/Linux:
-Compiler: Ubuntu clang version 12.0.0-3ubuntu1~20.04.5 with libstdc++ (libc++12 does not support std::range)  
-Compiler: g++-10 (Ubuntu 10.3.0-1ubuntu1~20.04) 10.3.0 
 
 ## Getting Started
 
