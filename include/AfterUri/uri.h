@@ -41,8 +41,8 @@ public:
   Uri(const Uri& copyFrom) = delete;
   auto operator=(const Uri& rhs) -> Uri& = delete;
 
-  Uri(Uri&& moveFrom);
-  auto operator=(Uri&& rhs) -> Uri&;
+  Uri(Uri&& moveFrom) noexcept;
+  auto operator=(Uri&& rhs) noexcept -> Uri&;
   ~Uri();
 
   /** @brief Parses the uriStr
@@ -53,14 +53,14 @@ public:
    * @return
    *    void
    * */
-  auto parseFrom(const std::span<const char> uriStr) noexcept -> Error;
+  [[nodiscard]] auto parseFrom(std::span<const char> uriStr) noexcept -> Error;
 
   /** @brief Checks whether the parsed uri is valid or not
    *
    * @return
    *    Returns an `Error` value that indicates if the parsing succeded or not
    * */
-  auto isValid() const noexcept -> Error;
+  [[nodiscard]] auto isValid() const noexcept -> Error;
 
   /** @brief Returns the scheme as an std::string
    *
@@ -68,7 +68,7 @@ public:
    *      A `std::string` that represents the scheme
    *
    * */
-  auto getScheme() const noexcept -> std::string;
+  [[nodiscard]] auto getScheme() const noexcept -> const std::string&;
 
   /**
    * @brief Returns the authority
@@ -77,7 +77,7 @@ public:
    * @return
    *    A `std::string` that represents the authority
    * */
-  auto getAuthority() const noexcept -> std::string;
+  [[nodiscard]] auto getAuthority() const noexcept -> const std::string&;
 
   /**
    * @brief Returns the port number if is present in the uri
@@ -86,7 +86,7 @@ public:
    * @return
    *    A `std::uint16_t` that represents the port number
    * */
-  auto getPort() const noexcept -> std::uint16_t;
+  [[nodiscard]] auto getPort() const noexcept -> std::uint16_t;
   /**
    * @brief Checks if the uri contains a port number
    *
@@ -95,12 +95,12 @@ public:
    *    Returns `true` if a port is present if the uri, `false` otherwise
    * */
 
-  auto hasPort() const noexcept -> bool;
+  [[nodiscard]] auto hasPort() const noexcept -> bool;
 
 private:
   struct UriImpl;
-  Error mError;
-  std::unique_ptr<UriImpl> pUri;
+  Error mError{Error::OK};
+  std::unique_ptr<UriImpl> pUri{nullptr};
 };
 
 
